@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage(this.startQuiz, {super.key});
@@ -17,9 +18,9 @@ class HomePage extends StatelessWidget {
             color: const Color.fromARGB(102, 255, 255, 255),
           ),
           const SizedBox(height: 50),
-          const Text(
+          Text(
             'Learn Flutter the fun way!',
-            style: TextStyle(
+            style: GoogleFonts.lato(
               color: Colors.white,
               fontSize: 22,
             ),
