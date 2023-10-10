@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/home_page.dart';
 import 'package:quiz_app/question_page.dart';
 
@@ -21,13 +22,25 @@ class _QuizState extends State<Quiz> {
 
   void switchScreen() {
     setState(() {
-      activeScreen = const QuestionPage();
+      activeScreen = QuestionPage(
+        onSelectAnswer: chooseAnswer,
+      );
     });
+  }
+
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+
+    if (selectedAnswers.length == questions.length) {
+      setState(() {
+        selectedAnswers=[];
+        activeScreen=HomePage(switchScreen);
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       home: Scaffold(
         body: Container(

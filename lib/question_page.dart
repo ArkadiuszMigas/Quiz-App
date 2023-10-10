@@ -4,7 +4,12 @@ import 'package:quiz_app/data/questions.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class QuestionPage extends StatefulWidget {
-  const QuestionPage({super.key});
+  const QuestionPage({
+    super.key,
+    required this.onSelectAnswer,
+  });
+
+  final void Function(String answer) onSelectAnswer;
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -13,7 +18,8 @@ class QuestionPage extends StatefulWidget {
 class _QuestionPageState extends State<QuestionPage> {
   var curretQuestionIndex = 0;
 
-  void answerQuestion() {
+  void answerQuestion(String selectAnswer) {
+    widget.onSelectAnswer(selectAnswer);
     setState(() {
       curretQuestionIndex++;
     });
@@ -34,17 +40,18 @@ class _QuestionPageState extends State<QuestionPage> {
             Text(
               curretQuestion.text,
               style: GoogleFonts.lato(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold
-              ),
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 30),
             ...curretQuestion.getShuffledAndswers().map((answer) {
               return AnswerButton(
                 answerText: answer,
-                onTap: answerQuestion,
+                onTap: (){
+                  answerQuestion(answer);
+                },
               );
             }),
           ],
