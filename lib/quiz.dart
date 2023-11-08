@@ -37,9 +37,17 @@ class _QuizState extends State<Quiz> {
         activeScreen = ResultsPage(
           switchScreen,
           chosenAnswers: selectedAnswers,
+          onRestart: restartQuiz,
         );
       });
     }
+  }
+
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers=[];
+      activeScreen=HomePage(switchScreen);
+    });
   }
 
   @override

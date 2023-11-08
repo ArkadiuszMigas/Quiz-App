@@ -4,9 +4,14 @@ import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/questions_summary/questions_summary.dart';
 
 class ResultsPage extends StatelessWidget {
-  const ResultsPage(void Function() switchScreen,
-      {super.key, required this.chosenAnswers});
+  const ResultsPage(
+    void Function() switchScreen, {
+    super.key,
+    required this.chosenAnswers,
+    required this.onRestart,
+  });
 
+  final void Function() onRestart;
   final List<String> chosenAnswers;
 
   List<Map<String, Object>> getSummaryData() {
@@ -44,7 +49,6 @@ class ResultsPage extends StatelessWidget {
               style: GoogleFonts.lato(
                 color: Colors.white,
                 fontSize: 18,
-                
               ),
             ),
             const SizedBox(
@@ -55,9 +59,9 @@ class ResultsPage extends StatelessWidget {
               height: 30,
             ),
             OutlinedButton.icon(
-              onPressed: () {},
+              onPressed: onRestart,
               style: OutlinedButton.styleFrom(foregroundColor: Colors.white),
-              icon: const Icon(Icons.restart_alt),
+              icon: const Icon(Icons.refresh),
               label: const Text('Restart Quiz'),
             )
           ],
