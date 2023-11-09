@@ -34,8 +34,9 @@ class ResultsPage extends StatelessWidget {
     final summaryData = getSummaryData();
     final numberOfTotalQuest = questions.length;
     final correctQuestions = summaryData.where((data) {
-      return data['user_answer'] == data['corret_answer'];
-    }).length;
+      return data['correct_answer'] == data['user_answer'];
+    });
+    final numberCorrectQuestions = correctQuestions.length;
 
     return SizedBox(
       width: double.infinity, //take as much space as possible
@@ -45,7 +46,7 @@ class ResultsPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'You answered $correctQuestions out of $numberOfTotalQuest questions correctly!',
+              'You answered $numberCorrectQuestions out of $numberOfTotalQuest questions correctly!',
               style: GoogleFonts.lato(
                 color: Colors.white,
                 fontSize: 18,
